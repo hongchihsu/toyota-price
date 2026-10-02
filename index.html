@@ -20,11 +20,13 @@
 <div class="row"><span class="name">精裝折讓（獎金）</span><span class="value" id="premium"></span></div>
 <div class="row"><span class="name">影音折讓（獎金）</span><span class="value" id="av"></span></div>
 <div class="row"><span class="name">可折讓獎金</span><span class="value" id="total"></span></div>
+<div class="row"><span class="name">精裝成本</span><span class="value" id="premiumCost"></span></div>
+<div class="row"><span class="name" id="avCostName">影音成本</span><span class="value" id="avCost"></span></div>
 </div>
 <div class="card deal">
 <div class="row"><span class="name">空車成交價</span><span class="value" id="deal1"></span></div>
 <div class="row"><span class="name">空車＋精裝成交價</span><span class="value" id="deal2"></span></div>
-<div class="row"><span class="name">空車＋精裝＋影音成交價</span><span class="value" id="deal3"></span></div>
+<div class="row"><span class="name" id="deal3Name">空車＋精裝＋影音成交價</span><span class="value" id="deal3"></span></div>
 </div>
 <div class="note" id="note"><b>備註</b><span id="noteText"></span></div>
 <div class="muted">無投保乙式時，減發金額僅反映於成交價，不更動原折讓顯示。</div>
@@ -43,6 +45,12 @@ const $=id=>document.getElementById(id), fmt=n=>'NT$ '+n.toLocaleString('zh-TW')
 const model=$('model'),trim=$('trim'),ins=$('insurance');
 function fillModels(){[...new Set(data.map(x=>x.model))].forEach(x=>model.add(new Option(x,x)));fillTrims()}
 function fillTrims(){const old=trim.value;trim.innerHTML='';data.filter(x=>x.model===model.value).forEach(x=>trim.add(new Option(x.trim,x.trim)));if([...trim.options].some(o=>o.value===old))trim.value=old;render()}
-function render(){const d=data.find(x=>x.model===model.value&&x.trim===trim.value);if(!d)return;const add=ins.value==='無'?-d.noIns:0;$('price').textContent=fmt(d.price);$('base').textContent=fmt(d.base);$('premium').textContent=fmt(d.premium);$('av').textContent=fmt(d.av);$('total').textContent=fmt(d.base+d.premium+d.av);$('deal1').textContent=fmt(d.price-d.base+add);$('deal2').textContent=fmt(d.price-d.base-d.premium+add);$('deal3').textContent=fmt(d.price-d.base-d.premium-d.av+add);$('noteText').textContent=d.note==='無'?'無':d.note;$('note').classList.toggle('hidden',d.note==='無')}
+function render(){const d=data.find(x=>x.model===model.value&&x.trim===trim.value);if(!d)return;const add=ins.value==='無'?-d.noIns:0;const premiumCost=36000;
+const avCost=45000;
+const isRav4=d.model.includes('RAV4');
+$('premiumCost').textContent=fmt(premiumCost);
+$('avCost').textContent=fmt(avCost);
+$('avCostName').textContent=isRav4?'尊爵成本':'影音成本';
+$('deal3Name').textContent=isRav4?'空車＋精裝＋尊爵成交價':'空車＋精裝＋影音成交價';$('price').textContent=fmt(d.price);$('base').textContent=fmt(d.base);$('premium').textContent=fmt(d.premium);$('av').textContent=fmt(d.av);$('total').textContent=fmt(d.base+d.premium+d.av);$('deal1').textContent=fmt(d.price-d.base+add);$('deal2').textContent=fmt(d.price-d.base+premiumCost+add);$('deal3').textContent=fmt(d.price-d.base+premiumCost+avCost+add);$('noteText').textContent=d.note==='無'?'無':d.note;$('note').classList.toggle('hidden',d.note==='無')}
 model.addEventListener('change',fillTrims);trim.addEventListener('change',render);ins.addEventListener('change',render);fillModels();
 </script></body></html>
