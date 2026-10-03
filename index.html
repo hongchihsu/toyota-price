@@ -667,18 +667,7 @@ $('selectedBonus').textContent=
   }
 
 
-  /* 空車叫成交價
-     有套件叫成本價 */
-
-  let priceType='成交價';
-
-  if(
-    quote.value==='pkg1' ||
-    quote.value==='pkg2' ||
-    quote.value==='pkg2only'
-  ){
-    priceType='成本價';
-  }
+  let priceType='成本價';
 
 
   $('dealName').textContent=
