@@ -499,7 +499,7 @@ if(quote.value==='base'){
 
   displayPrice=d.price;
 
-  displayBonus=d.base;
+  displayBonus=d.base-5000;
 
 }
 
@@ -626,7 +626,10 @@ $('selectedBonus').textContent=
     d.price-
     d.base+
     adjustment;
-
+  
+  if(quote.value==='base'){
+  amount-=5000;
+}
 
   if(quote.value==='pkg1'){
     amount+=d.cost1;
