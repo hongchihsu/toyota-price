@@ -147,7 +147,7 @@ select{
 </div>
 
 <div class="muted">
-無投保乙式時，減發金額僅反映於成交價，不更動原折讓顯示。
+無投保乙式時，減發金額僅反映於成本價，不更動原折讓顯示。
 </div>
 
 </div>
@@ -623,7 +623,7 @@ if(!d)return;
 
 const adjustment=
 ins.value==='無'
-? -d.noIns
+? d.noIns
 : 0;
 
 
