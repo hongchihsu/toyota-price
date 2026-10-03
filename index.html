@@ -105,29 +105,24 @@ select{
     <span class="value" id="base"></span>
   </div>
 
-  <div class="row" id="bonus1Row" style="display:none;">
-    <span class="name" id="bonus1Name"></span>
-    <span class="value" id="bonus1"></span>
+  <div class="row" id="pkg1OriginalRow">
+    <span class="name" id="pkg1OriginalName"></span>
+    <span class="value" id="pkg1Original"></span>
   </div>
 
-  <div class="row" id="bonus2Row" style="display:none;">
-    <span class="name" id="bonus2Name"></span>
-    <span class="value" id="bonus2"></span>
+  <div class="row" id="pkg1BonusRow">
+    <span class="name" id="pkg1BonusName"></span>
+    <span class="value" id="pkg1Bonus"></span>
   </div>
 
-  <div class="row">
-    <span class="name">空車＋精裝＋尊榮獎金</span>
-    <span class="value" id="total"></span>
+  <div class="row" id="pkg2OriginalRow">
+    <span class="name" id="pkg2OriginalName"></span>
+    <span class="value" id="pkg2Original"></span>
   </div>
 
-  <div class="row" id="cost1Row">
-    <span class="name" id="cost1Name"></span>
-    <span class="value" id="cost1"></span>
-  </div>
-
-  <div class="row" id="cost2Row">
-    <span class="name" id="cost2Name"></span>
-    <span class="value" id="cost2"></span>
+  <div class="row" id="pkg2BonusRow">
+    <span class="name" id="pkg2BonusName"></span>
+    <span class="value" id="pkg2Bonus"></span>
   </div>
 
 </div>
@@ -147,7 +142,7 @@ select{
 </div>
 
 <div class="muted">
-無投保乙式時，減發金額僅反映於成本價，不更動原折讓顯示。
+未投保乙式時，加回減發金額至成交／成本價，獎金顯示不變。
 </div>
 
 </div>
@@ -237,6 +232,7 @@ cost2Name:'尊榮套件',cost2:36000,
 noIns:8000,note:'無',
 quotes:['base','pkg2only']
 },
+
 
 /* =========================
    COROLLA CROSS 26/26 汽油
@@ -356,6 +352,8 @@ cost2Name:'影音',cost2:53000,
 noIns:4000,note:'無',
 quotes:['base','pkg1','pkg2']
 },
+
+
 /* =========================
    COROLLA CROSS 26/27 汽油
 ========================= */
@@ -489,284 +487,362 @@ const quote=$('quote');
 
 
 function current(){
-
-return data.find(x=>
-x.model===model.value &&
-x.year===year.value &&
-x.trim===trim.value
-);
-
+  return data.find(x=>
+    x.model===model.value &&
+    x.year===year.value &&
+    x.trim===trim.value
+  );
 }
 
 
 function fillModels(){
 
-model.innerHTML='';
+  model.innerHTML='';
 
-[...new Set(data.map(x=>x.model))]
-.forEach(x=>model.add(new Option(x,x)));
+  [...new Set(data.map(x=>x.model))]
+  .forEach(x=>model.add(new Option(x,x)));
 
-fillYears();
+  fillYears();
 
 }
 
 
 function fillYears(){
 
-const old=year.value;
+  const old=year.value;
 
-year.innerHTML='';
+  year.innerHTML='';
 
-[...new Set(
-data
-.filter(x=>x.model===model.value)
-.map(x=>x.year)
-)]
-.forEach(x=>year.add(new Option(x,x)));
+  [...new Set(
+    data
+    .filter(x=>x.model===model.value)
+    .map(x=>x.year)
+  )]
+  .forEach(x=>year.add(new Option(x,x)));
 
-if([...year.options].some(o=>o.value===old)){
-year.value=old;
-}
+  if([...year.options].some(o=>o.value===old)){
+    year.value=old;
+  }
 
-fillTrims();
+  fillTrims();
 
 }
 
 
 function fillTrims(){
 
-const old=trim.value;
+  const old=trim.value;
 
-trim.innerHTML='';
+  trim.innerHTML='';
 
-data
-.filter(x=>
-x.model===model.value &&
-x.year===year.value
-)
-.forEach(x=>
-trim.add(new Option(x.trim,x.trim))
-);
+  data
+  .filter(x=>
+    x.model===model.value &&
+    x.year===year.value
+  )
+  .forEach(x=>
+    trim.add(new Option(x.trim,x.trim))
+  );
 
-if([...trim.options].some(o=>o.value===old)){
-trim.value=old;
-}
+  if([...trim.options].some(o=>o.value===old)){
+    trim.value=old;
+  }
 
-fillQuotes();
+  fillQuotes();
 
 }
 
 
 function quoteLabel(d,type){
 
-if(type==='base'){
-return '空車';
-}
+  if(type==='base'){
+    return '空車';
+  }
 
-if(type==='pkg1'){
-return '空車＋'+d.cost1Name;
-}
+  if(type==='pkg1'){
+    return '空車＋'+d.cost1Name;
+  }
 
-if(type==='pkg2'){
-return '空車＋'+d.cost1Name+'＋'+d.cost2Name;
-}
+  if(type==='pkg2'){
+    return '空車＋'+d.cost1Name+'＋'+d.cost2Name;
+  }
 
-if(type==='pkg2only'){
-return '空車＋'+d.cost2Name;
-}
+  if(type==='pkg2only'){
+    return '空車＋'+d.cost2Name;
+  }
 
-return '空車';
+  return '空車';
 
 }
 
 
 function fillQuotes(){
 
-const d=current();
+  const d=current();
 
-if(!d)return;
+  if(!d)return;
 
-const old=quote.value;
+  const old=quote.value;
 
-quote.innerHTML='';
+  quote.innerHTML='';
 
-d.quotes.forEach(q=>{
-quote.add(
-new Option(
-quoteLabel(d,q),
-q
-)
-);
-});
+  d.quotes.forEach(q=>{
+    quote.add(
+      new Option(
+        quoteLabel(d,q),
+        q
+      )
+    );
+  });
 
-if([...quote.options].some(o=>o.value===old)){
-quote.value=old;
-}
+  if([...quote.options].some(o=>o.value===old)){
+    quote.value=old;
+  }
 
-render();
+  render();
 
 }
 
 
 function render(){
 
-const d=current();
+  const d=current();
 
-if(!d)return;
-
-
-/* 無乙式減發
-   RAV4 = 8000
-   CC = 4000
-   直接依各車型資料計算
-*/
-
-const adjustment=
-ins.value==='無'
-? d.noIns
-: 0;
+  if(!d)return;
 
 
-$('price').textContent=fmt(d.price);
-$('base').textContent=fmt(d.base);
+  /* 無乙式加回減發金額 */
+
+  const adjustment=
+    ins.value==='無'
+    ? d.noIns
+    : 0;
 
 
-/* 獎金 */
+  /* 空車 */
 
-$('bonus1Row')
-.classList.toggle(
-'hidden',
-!d.bonus1Name
-);
-
-$('bonus2Row')
-.classList.toggle(
-'hidden',
-!d.bonus2Name
-);
-
-$('bonus1Name').textContent=
-(d.bonus1Name||'')+'折讓（獎金）';
-
-$('bonus2Name').textContent=
-(d.bonus2Name||'')+'折讓（獎金）';
-
-$('bonus1').textContent=
-fmt(d.bonus1||0);
-
-$('bonus2').textContent=
-fmt(d.bonus2||0);
-
-$('total').textContent=
-fmt(
-d.base+
-(d.bonus1||0)+
-(d.bonus2||0)
-);
+  $('price').textContent=fmt(d.price);
+  $('base').textContent=fmt(d.base);
 
 
-/* 成本 */
+  /* =========================
+     原價設定
+     RAV4 精裝 70,000
+     RAV4 尊榮 70,000
 
-$('cost1Row')
-.classList.toggle(
-'hidden',
-!d.cost1Name
-);
+     CC 精裝 50,000
+     CC 影音 80,000
+  ========================= */
 
-$('cost2Row')
-.classList.toggle(
-'hidden',
-!d.cost2Name
-);
+  let pkg1Original=0;
+  let pkg2Original=0;
 
-$('cost1Name').textContent=
-(d.cost1Name||'')+'成本';
+  if(d.model==='RAV4 HEV'){
+    pkg1Original=70000;
+    pkg2Original=70000;
+  }
 
-$('cost2Name').textContent=
-(d.cost2Name||'')+'成本';
-
-$('cost1').textContent=
-fmt(d.cost1||0);
-
-$('cost2').textContent=
-fmt(d.cost2||0);
+  if(d.model==='COROLLA CROSS'){
+    pkg1Original=50000;
+    pkg2Original=80000;
+  }
 
 
-/* 成交價 */
+  /* =========================
+     第一層：空車＋精裝
+  ========================= */
 
-let amount=
-d.price-
-d.base+
-adjustment;
+  const hasPkg1=!!d.bonus1Name;
+
+  $('pkg1OriginalRow').classList.toggle(
+    'hidden',
+    !hasPkg1
+  );
+
+  $('pkg1BonusRow').classList.toggle(
+    'hidden',
+    !hasPkg1
+  );
+
+  if(hasPkg1){
+
+    $('pkg1OriginalName').textContent=
+      '空車＋'+d.bonus1Name+'原價';
+
+    $('pkg1Original').textContent=
+      fmt(
+        d.price+
+        pkg1Original
+      );
+
+    $('pkg1BonusName').textContent=
+      '空車＋'+d.bonus1Name+'獎金';
+
+    $('pkg1Bonus').textContent=
+      fmt(
+        d.base+
+        (d.bonus1||0)
+      );
+
+  }
 
 
-if(quote.value==='pkg1'){
+  /* =========================
+     第二層
+     RAV4 = 精裝＋尊榮
+     CC   = 精裝＋影音
+     PHEV = 尊榮套件
+  ========================= */
 
-amount+=d.cost1;
+  const hasPkg2=!!d.bonus2Name;
 
-}
+  $('pkg2OriginalRow').classList.toggle(
+    'hidden',
+    !hasPkg2
+  );
+
+  $('pkg2BonusRow').classList.toggle(
+    'hidden',
+    !hasPkg2
+  );
+
+  if(hasPkg2){
+
+    let pkg2Label='';
+    let originalPrice=0;
+
+    if(hasPkg1){
+
+      pkg2Label=
+        '空車＋'+
+        d.bonus1Name+
+        '＋'+
+        d.bonus2Name;
+
+      originalPrice=
+        d.price+
+        pkg1Original+
+        pkg2Original;
+
+    }else{
+
+      /* PHEV 沒有精裝 */
+
+      pkg2Label=
+        '空車＋'+
+        d.bonus2Name;
+
+      originalPrice=
+        d.price+
+        pkg2Original;
+
+    }
 
 
-if(quote.value==='pkg2'){
+    $('pkg2OriginalName').textContent=
+      pkg2Label+'原價';
 
-amount+=
-d.cost1+
-d.cost2;
-
-}
+    $('pkg2Original').textContent=
+      fmt(originalPrice);
 
 
-if(quote.value==='pkg2only'){
+    $('pkg2BonusName').textContent=
+      pkg2Label+'獎金';
 
-amount+=d.cost2;
+    $('pkg2Bonus').textContent=
+      fmt(
+        d.base+
+        (d.bonus1||0)+
+        (d.bonus2||0)
+      );
 
-}
-
-
-$('dealName').textContent=
-quoteLabel(d,quote.value)+
-'成交價';
-
-$('deal').textContent=
-fmt(amount);
+  }
 
 
-/* 備註 */
+  /* =========================
+     成交／成本價計算
+  ========================= */
 
-$('noteText').textContent=d.note;
+  let amount=
+    d.price-
+    d.base+
+    adjustment;
 
-$('note')
-.classList.toggle(
-'hidden',
-d.note==='無'
-);
+
+  if(quote.value==='pkg1'){
+    amount+=d.cost1;
+  }
+
+
+  if(quote.value==='pkg2'){
+    amount+=
+      d.cost1+
+      d.cost2;
+  }
+
+
+  if(quote.value==='pkg2only'){
+    amount+=d.cost2;
+  }
+
+
+  /* 空車叫成交價
+     有套件叫成本價 */
+
+  let priceType='成交價';
+
+  if(
+    quote.value==='pkg1' ||
+    quote.value==='pkg2' ||
+    quote.value==='pkg2only'
+  ){
+    priceType='成本價';
+  }
+
+
+  $('dealName').textContent=
+    quoteLabel(d,quote.value)+
+    priceType;
+
+  $('deal').textContent=
+    fmt(amount);
+
+
+  /* 備註 */
+
+  $('noteText').textContent=d.note;
+
+  $('note').classList.toggle(
+    'hidden',
+    d.note==='無'
+  );
 
 }
 
 
 model.addEventListener(
-'change',
-fillYears
+  'change',
+  fillYears
 );
 
 year.addEventListener(
-'change',
-fillTrims
+  'change',
+  fillTrims
 );
 
 trim.addEventListener(
-'change',
-fillQuotes
+  'change',
+  fillQuotes
 );
 
 ins.addEventListener(
-'change',
-render
+  'change',
+  render
 );
 
 quote.addEventListener(
-'change',
-render
+  'change',
+  render
 );
 
 
