@@ -96,9 +96,16 @@ select{
 <div class="card">
 
   <div class="row">
-    <span class="name">空車單價</span>
-    <span class="value" id="price"></span>
+    <span class="name" id="selectedPriceName"></span>
+    <span class="value" id="selectedPrice"></span>
   </div>
+
+  <div class="row">
+    <span class="name" id="selectedBonusName"></span>
+    <span class="value" id="selectedBonus"></span>
+  </div>
+
+</div>
 
   <div class="row">
     <span class="name">空車獎金</span>
@@ -619,16 +626,136 @@ function render(){
     : 0;
 
 
-  /* 空車 */
+/* =========================
+   依報價方式，只顯示目前選擇的方案
+========================= */
 
-  $('price').textContent=fmt(d.price);
-  $('base').textContent=fmt(d.base);
+let displayName='';
+let displayPrice=0;
+let displayBonus=0;
+
+
+/* 空車 */
+
+if(quote.value==='base'){
+
+  displayName='空車';
+
+  displayPrice=d.price;
+
+  displayBonus=d.base;
+
+}
+
+
+/* 空車＋精裝 */
+
+if(quote.value==='pkg1'){
+
+  displayName=
+    '空車＋'+d.bonus1Name;
+
+  let original1=0;
+
+  if(d.model==='RAV4 HEV'){
+    original1=70000;
+  }
+
+  if(d.model==='COROLLA CROSS'){
+    original1=50000;
+  }
+
+  displayPrice=
+    d.price+
+    original1;
+
+  displayBonus=
+    d.base+
+    (d.bonus1||0);
+
+}
+
+
+/* 空車＋精裝＋尊榮 / 影音 */
+
+if(quote.value==='pkg2'){
+
+  displayName=
+    '空車＋'+
+    d.bonus1Name+
+    '＋'+
+    d.bonus2Name;
+
+  let original1=0;
+  let original2=0;
+
+  if(d.model==='RAV4 HEV'){
+    original1=70000;
+    original2=70000;
+  }
+
+  if(d.model==='COROLLA CROSS'){
+    original1=50000;
+    original2=80000;
+  }
+
+  displayPrice=
+    d.price+
+    original1+
+    original2;
+
+  displayBonus=
+    d.base+
+    (d.bonus1||0)+
+    (d.bonus2||0);
+
+}
+
+
+/* PHEV：空車＋尊榮套件 */
+
+if(quote.value==='pkg2only'){
+
+  displayName=
+    '空車＋'+d.bonus2Name;
+
+  let original2=0;
+
+  if(d.model==='RAV4 HEV'){
+    original2=70000;
+  }
+
+  displayPrice=
+    d.price+
+    original2;
+
+  displayBonus=
+    d.base+
+    (d.bonus2||0);
+
+}
+
+
+/* 顯示 */
+
+$('selectedPriceName').textContent=
+  displayName+
+  (quote.value==='base' ? '單價' : '原價');
+
+$('selectedPrice').textContent=
+  fmt(displayPrice);
+
+$('selectedBonusName').textContent=
+  displayName+'獎金';
+
+$('selectedBonus').textContent=
+  fmt(displayBonus);
 
 
   /* =========================
      原價設定
      RAV4 精裝 70,000
-     RAV4 尊榮 70,000
+     RAV4 尊榮 72,000
 
      CC 精裝 50,000
      CC 影音 80,000
