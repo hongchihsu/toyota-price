@@ -499,10 +499,19 @@ if(quote.value==='base'){
 
   displayPrice=d.price;
 
-  displayBonus=d.base-5000;
+  let baseDiscount=0;
+
+  if(d.model==='RAV4 HEV'){
+    baseDiscount=5000;
+  }
+
+  if(d.model==='COROLLA CROSS'){
+    baseDiscount=4000;
+  }
+
+  displayBonus=d.base-baseDiscount;
 
 }
-
 
 /* 空車＋精裝 */
 
@@ -627,9 +636,7 @@ $('selectedBonus').textContent=
     d.base+
     adjustment;
   
-  if(quote.value==='base'){
-  amount-=5000;
-}
+
 
   if(quote.value==='pkg1'){
     amount+=d.cost1;
