@@ -1325,6 +1325,20 @@ function getQuoteOptions(d){
 
   const packages=d.packages||[];
 
+if(d.exclusivePackages){
+
+  packages.forEach((pkg,i)=>{
+
+    result.push({
+      value:'packages-'+i,
+      packageIndexes:[i],
+      label:'空車＋'+pkg.name
+    });
+
+  });
+
+}else{
+
   const total=
     Math.pow(2,packages.length);
 
@@ -1350,6 +1364,8 @@ function getQuoteOptions(d){
     });
 
   }
+
+}
 
   /*
   排序：
