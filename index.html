@@ -7,46 +7,166 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;background:#f5f5f7;color:#1d1d1f;
+  margin:0;
+  background:#f5f5f7;
+  color:#1d1d1f;
   font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif
 }
-.wrap{max-width:560px;margin:auto;padding:18px 14px 40px}
+
+.wrap{
+  max-width:560px;
+  margin:auto;
+  padding:18px 14px 40px
+}
+
 .hero,.card{
-  background:#fff;border-radius:20px;
+  background:#fff;
+  border-radius:20px;
   box-shadow:0 5px 24px #0000000d
 }
-.hero{padding:20px 18px;margin-bottom:14px}
-.brand{font-size:13px;font-weight:800;letter-spacing:1.4px;color:#d71920}
-.hero h1{font-size:26px;margin:5px 0 4px}
-.hero p{font-size:14px;color:#6e6e73;margin:0}
-.card{padding:16px;margin:12px 0}
-.field{margin:0 0 14px}
-.field:last-child{margin:0}
-label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#555}
+
+.hero{
+  padding:20px 18px;
+  margin-bottom:14px
+}
+
+.brand{
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:1.4px;
+  color:#d71920
+}
+
+.hero h1{
+  font-size:26px;
+  margin:5px 0 4px
+}
+
+.hero p{
+  font-size:14px;
+  color:#6e6e73;
+  margin:0
+}
+
+.card{
+  padding:16px;
+  margin:12px 0
+}
+
+.field{
+  margin:0 0 14px
+}
+
+.field:last-child{
+  margin:0
+}
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:6px;
+  color:#555
+}
+
 select{
-  width:100%;font:inherit;font-size:17px;
-  border:1px solid #d2d2d7;border-radius:12px;
-  padding:12px 13px;background:#fff;color:#111
+  width:100%;
+  font:inherit;
+  font-size:17px;
+  border:1px solid #d2d2d7;
+  border-radius:12px;
+  padding:12px 13px;
+  background:#fff;
+  color:#111
 }
+
 .row{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:14px;padding:11px 2px;border-bottom:1px solid #eee
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:11px 2px;
+  border-bottom:1px solid #eee
 }
-.row:last-child{border:0}
-.name{font-size:14px;color:#555}
-.value{font-size:17px;font-weight:700;text-align:right}
-.deal{background:#1d1d1f;color:#fff}
-.deal .name{color:#d1d1d6}
-.deal .value{font-size:22px}
+
+.row:last-child{
+  border:0
+}
+
+.name{
+  font-size:14px;
+  color:#555
+}
+
+.value{
+  font-size:17px;
+  font-weight:700;
+  text-align:right
+}
+
+.bonusHint{
+  font-size:12px;
+  color:#86868b;
+  margin-top:7px;
+  line-height:1.4
+}
+
+.deal{
+  background:#1d1d1f;
+  color:#fff
+}
+
+.deal .name{
+  color:#d1d1d6
+}
+
+.deal .value{
+  font-size:22px
+}
+
 .note{
-  background:#fff7e6;border:1px solid #f2d19a;
-  border-radius:14px;padding:13px 14px;margin-top:12px;
-  font-size:14px;line-height:1.5
+  background:#fff7e6;
+  border:1px solid #f2d19a;
+  border-radius:14px;
+  padding:13px 14px;
+  margin-top:12px;
+  font-size:14px;
+  line-height:1.5
 }
-.note b{display:block;margin-bottom:3px}
-.muted{font-size:12px;color:#86868b;text-align:center;margin-top:16px}
-.hidden{display:none!important}
+
+.note b{
+  display:block;
+  margin-bottom:3px
+}
+
+.invoice{
+  background:#eef6ff;
+  border:1px solid #c9ddf5;
+  border-radius:14px;
+  padding:13px 14px;
+  margin-top:12px;
+  font-size:14px;
+  line-height:1.5
+}
+
+.invoice b{
+  display:block;
+  margin-bottom:3px
+}
+
+.muted{
+  font-size:12px;
+  color:#86868b;
+  text-align:center;
+  margin-top:16px;
+  line-height:1.5
+}
+
+.hidden{
+  display:none!important
+}
 </style>
 </head>
 
@@ -54,293 +174,1115 @@ select{
 
 <div class="wrap">
 
-<div class="hero">
-  <div class="brand">TOYOTA</div>
-  <h1>全車系折讓查詢</h1>
-  <p>選擇車型、年式與報價方式，自動計算成交價</p>
-</div>
-
-<div class="card">
-
-  <div class="field">
-    <label>車型</label>
-    <select id="model"></select>
+  <div class="hero">
+    <div class="brand">TOYOTA</div>
+    <h1>全車系折讓查詢</h1>
+    <p>選擇車型、年式與報價方式，自動計算成本價</p>
   </div>
 
-  <div class="field">
-    <label>年式</label>
-    <select id="year"></select>
+
+  <div class="card">
+
+    <div class="field">
+      <label>車型</label>
+      <select id="model"></select>
+    </div>
+
+    <div class="field">
+      <label>年式</label>
+      <select id="year"></select>
+    </div>
+
+    <div class="field">
+      <label>版本</label>
+      <select id="trim"></select>
+    </div>
+
+    <div class="field">
+      <label>投保乙式</label>
+      <select id="insurance">
+        <option value="有">有</option>
+        <option value="無">無</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>報價方式</label>
+      <select id="quote"></select>
+    </div>
+
   </div>
 
-  <div class="field">
-    <label>版本</label>
-    <select id="trim"></select>
+
+  <div class="card">
+
+    <div class="row">
+      <span class="name" id="selectedPriceName"></span>
+      <span class="value" id="selectedPrice"></span>
+    </div>
+
+    <div class="row">
+      <span class="name" id="selectedBonusName"></span>
+      <span class="value" id="selectedBonus"></span>
+    </div>
+
+    <div class="bonusHint hidden" id="bonusHint"></div>
+
   </div>
 
-  <div class="field">
-    <label>投保乙式</label>
-    <select id="insurance">
-      <option value="有">有</option>
-      <option value="無">無</option>
-    </select>
+
+  <div class="card deal">
+    <div class="row">
+      <span class="name" id="dealName">成本價</span>
+      <span class="value" id="deal"></span>
+    </div>
   </div>
 
-  <div class="field">
-    <label>報價方式</label>
-    <select id="quote"></select>
+
+  <div class="note hidden" id="note">
+    <b>備註</b>
+    <span id="noteText"></span>
   </div>
 
-</div>
 
-
-<div class="card">
-
-  <div class="row">
-    <span class="name" id="selectedPriceName"></span>
-    <span class="value" id="selectedPrice"></span>
+  <div class="invoice hidden" id="invoice">
+    <b>發票註記</b>
+    <span id="invoiceText"></span>
   </div>
 
-  <div class="row">
-    <span class="name" id="selectedBonusName"></span>
-    <span class="value" id="selectedBonus"></span>
+
+  <div class="muted">
+    未投保乙式時，加回減發金額至成本價；獎金顯示不變。
   </div>
-
-</div>
-
-
-<div class="card deal">
-  <div class="row">
-    <span class="name" id="dealName">成交價</span>
-    <span class="value" id="deal"></span>
-  </div>
-</div>
-
-
-<div class="note" id="note">
-  <b>備註</b>
-  <span id="noteText"></span>
-</div>
-
-<div class="muted">
-未投保乙式時，加回減發金額至成交／成本價，獎金顯示不變。
-</div>
 
 </div>
 
 
 <script>
 
+/*
+==================================================
+TOYOTA 車型資料區
+
+之後新增車型：
+只需要把新的 { ... } 資料貼在 const data=[ ] 裡面。
+
+計算公式不需要修改。
+==================================================
+*/
+
 const data=[
 
-/* =========================
+
+/* ==================================================
+   ALTIS 26/27
+================================================== */
+
+{
+  model:'ALTIS',
+  year:'26/27',
+  trim:'汽油 經典',
+  price:735000,
+
+  base:29000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:43000,
+      cost:21000,
+      bonus:22000
+    },
+    {
+      name:'影音',
+      original:30000,
+      cost:21000,
+      bonus:9000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'ALTIS',
+  year:'26/27',
+  trim:'汽油 豪華',
+  price:805000,
+
+  base:29000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:43000,
+      cost:21000,
+      bonus:22000
+    },
+    {
+      name:'影音',
+      original:78000,
+      cost:53000,
+      bonus:25000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'ALTIS',
+  year:'26/27',
+  trim:'汽油 The 60th',
+  price:815000,
+
+  base:29000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:43000,
+      cost:21000,
+      bonus:22000
+    },
+    {
+      name:'影音',
+      original:78000,
+      cost:53000,
+      bonus:25000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'ALTIS',
+  year:'26/27',
+  trim:'汽油 GR SPORT',
+  price:915000,
+
+  base:29000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:43000,
+      cost:21000,
+      bonus:22000
+    },
+    {
+      name:'影音',
+      original:78000,
+      cost:53000,
+      bonus:25000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'ALTIS',
+  year:'26/27',
+  trim:'HYBRID 豪華',
+  price:855000,
+
+  base:21000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:43000,
+      cost:21000,
+      bonus:22000
+    },
+    {
+      name:'影音',
+      original:78000,
+      cost:53000,
+      bonus:25000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'ALTIS',
+  year:'26/27',
+  trim:'HYBRID 尊爵',
+  price:885000,
+
+  base:21000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:43000,
+      cost:21000,
+      bonus:22000
+    },
+    {
+      name:'影音',
+      original:78000,
+      cost:53000,
+      bonus:25000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'ALTIS',
+  year:'26/27',
+  trim:'HYBRID The 60th',
+  price:895000,
+
+  base:21000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:43000,
+      cost:21000,
+      bonus:22000
+    },
+    {
+      name:'影音',
+      original:78000,
+      cost:53000,
+      bonus:25000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'ALTIS',
+  year:'26/27',
+  trim:'HYBRID GR SPORT',
+  price:919000,
+
+  base:21000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:43000,
+      cost:21000,
+      bonus:22000
+    },
+    {
+      name:'影音',
+      original:78000,
+      cost:53000,
+      bonus:25000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+
+
+/* ==================================================
+   bZ4X 26/27
+================================================== */
+
+{
+  model:'bZ4X',
+  year:'26/27',
+  trim:'標準版',
+  price:1280000,
+
+  base:25600,
+  baseDeduct:5000,
+  noIns:5000,
+
+  packages:[
+    {
+      name:'尊榮版',
+      original:69000,
+      cost:39000,
+      bonus:30000
+    },
+    {
+      name:'PPS版',
+      original:118000,
+      cost:88000,
+      bonus:30000
+    }
+  ],
+
+  note:'3/1～10/31受訂：6個月隨插即充吃到飽（不限一般車、營業車、租賃車）',
+  invoiceNote:'bZ4X隨插即充'
+},
+
+
+
+/* ==================================================
+   CAMRY 26/26
+================================================== */
+
+{
+  model:'CAMRY',
+  year:'26/26',
+  trim:'汽油 尊爵',
+  price:985000,
+
+  base:60000,
+  baseDeduct:5000,
+  noIns:5000,
+
+  packages:[
+    {
+      name:'尊榮版',
+      original:68000,
+      cost:39000,
+      bonus:29000
+    }
+  ],
+
+  note:'贈送璨晶鍍膜（不送折 NT$5,000）',
+  invoiceNote:''
+},
+
+{
+  model:'CAMRY',
+  year:'26/26',
+  trim:'汽油 旗艦',
+  price:1109000,
+
+  base:60000,
+  baseDeduct:5000,
+  noIns:5000,
+
+  packages:[
+    {
+      name:'尊榮版',
+      original:68000,
+      cost:39000,
+      bonus:29000
+    }
+  ],
+
+  note:'贈送璨晶鍍膜（不送折 NT$5,000）',
+  invoiceNote:''
+},
+
+{
+  model:'CAMRY',
+  year:'26/26',
+  trim:'HYBRID 尊爵',
+  price:1129000,
+
+  base:20000,
+  baseDeduct:8000,
+  noIns:8000,
+
+  packages:[
+    {
+      name:'尊榮版',
+      original:68000,
+      cost:39000,
+      bonus:29000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'CAMRY',
+  year:'26/26',
+  trim:'HYBRID 旗艦',
+  price:1250000,
+
+  base:20000,
+  baseDeduct:8000,
+  noIns:8000,
+
+  packages:[
+    {
+      name:'尊榮版',
+      original:68000,
+      cost:39000,
+      bonus:29000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+
+
+/* ==================================================
+   CAMRY 26/27
+================================================== */
+
+{
+  model:'CAMRY',
+  year:'26/27',
+  trim:'汽油 尊爵',
+  price:985000,
+
+  base:20000,
+  baseDeduct:5000,
+  noIns:5000,
+
+  packages:[
+    {
+      name:'尊榮版',
+      original:68000,
+      cost:39000,
+      bonus:29000
+    }
+  ],
+
+  note:'贈送璨晶鍍膜（不送折 NT$5,000）',
+  invoiceNote:''
+},
+
+{
+  model:'CAMRY',
+  year:'26/27',
+  trim:'汽油 旗艦',
+  price:1109000,
+
+  base:20000,
+  baseDeduct:5000,
+  noIns:5000,
+
+  packages:[
+    {
+      name:'尊榮版',
+      original:68000,
+      cost:39000,
+      bonus:29000
+    }
+  ],
+
+  note:'贈送璨晶鍍膜（不送折 NT$5,000）',
+  invoiceNote:''
+},
+
+{
+  model:'CAMRY',
+  year:'26/27',
+  trim:'HYBRID 尊爵',
+  price:1129000,
+
+  base:10000,
+  baseDeduct:8000,
+  noIns:8000,
+
+  packages:[
+    {
+      name:'尊榮版',
+      original:68000,
+      cost:39000,
+      bonus:29000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'CAMRY',
+  year:'26/27',
+  trim:'HYBRID 旗艦',
+  price:1250000,
+
+  base:10000,
+  baseDeduct:8000,
+  noIns:8000,
+
+  packages:[
+    {
+      name:'尊榮版',
+      original:68000,
+      cost:39000,
+      bonus:29000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+
+
+/* ==================================================
+   COROLLA CROSS 26/27
+================================================== */
+
+{
+  model:'COROLLA CROSS',
+  year:'26/27',
+  trim:'汽油 豪華',
+  price:809000,
+
+  base:38000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:50000,
+      cost:23000,
+      bonus:27000
+    },
+    {
+      name:'影音',
+      original:80000,
+      cost:53000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'COROLLA CROSS',
+  year:'26/27',
+  trim:'汽油 豪華（選）',
+  price:839000,
+
+  base:27000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:50000,
+      cost:23000,
+      bonus:27000
+    },
+    {
+      name:'影音',
+      original:80000,
+      cost:53000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'COROLLA CROSS',
+  year:'26/27',
+  trim:'汽油 The 60th',
+  price:889000,
+
+  base:27000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:50000,
+      cost:23000,
+      bonus:27000
+    },
+    {
+      name:'影音',
+      original:80000,
+      cost:53000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'COROLLA CROSS',
+  year:'26/27',
+  trim:'汽油 GR SPORT',
+  price:915000,
+
+  base:38000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:50000,
+      cost:23000,
+      bonus:27000
+    },
+    {
+      name:'影音',
+      original:80000,
+      cost:53000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'COROLLA CROSS',
+  year:'26/27',
+  trim:'HYBRID 豪華',
+  price:849000,
+
+  base:41000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:50000,
+      cost:23000,
+      bonus:27000
+    },
+    {
+      name:'影音',
+      original:80000,
+      cost:53000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'COROLLA CROSS',
+  year:'26/27',
+  trim:'HYBRID 豪華（選）',
+  price:879000,
+
+  base:31000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:50000,
+      cost:23000,
+      bonus:27000
+    },
+    {
+      name:'影音',
+      original:80000,
+      cost:53000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'COROLLA CROSS',
+  year:'26/27',
+  trim:'HYBRID The 60th',
+  price:919000,
+
+  base:31000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:50000,
+      cost:23000,
+      bonus:27000
+    },
+    {
+      name:'影音',
+      original:80000,
+      cost:53000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'COROLLA CROSS',
+  year:'26/27',
+  trim:'HYBRID GR SPORT',
+  price:985000,
+
+  base:46000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:50000,
+      cost:23000,
+      bonus:27000
+    },
+    {
+      name:'影音',
+      original:80000,
+      cost:53000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'COROLLA CROSS',
+  year:'26/27',
+  trim:'HYBRID GR SPORT（選）',
+  price:1035000,
+
+  base:41000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:50000,
+      cost:23000,
+      bonus:27000
+    },
+    {
+      name:'影音',
+      original:80000,
+      cost:53000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+{
+  model:'COROLLA CROSS',
+  year:'26/27',
+  trim:'HYBRID 旗艦',
+  price:989000,
+
+  base:41000,
+  baseDeduct:4000,
+  noIns:4000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:50000,
+      cost:23000,
+      bonus:27000
+    },
+    {
+      name:'影音',
+      original:80000,
+      cost:53000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
+},
+
+
+
+/* ==================================================
+   HILUX 26/27
+================================================== */
+
+{
+  model:'HILUX',
+  year:'26/27',
+  trim:'標準版',
+  price:1619000,
+
+  base:30000,
+  baseDeduct:5000,
+  noIns:5000,
+
+  packages:[
+    {
+      name:'PPS版',
+      original:120000,
+      cost:73000,
+      bonus:47000
+    }
+  ],
+
+  note:'交車津貼 NT$5,000（可折讓）',
+  invoiceNote:''
+},
+
+
+
+/* ==================================================
    RAV4 HEV 26/26
-========================= */
+================================================== */
 
 {
-model:'RAV4 HEV',year:'26/26',trim:'豪華',
-price:1040000,base:58000,
-bonus1Name:'精裝',bonus1:34000,
-bonus2Name:'尊榮',bonus2:27000,
-cost1Name:'精裝',cost1:36000,
-cost2Name:'尊榮',cost2:45000,
-noIns:8000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
+  model:'RAV4 HEV',
+  year:'26/26',
+  trim:'豪華',
+  price:1040000,
+
+  base:58000,
+  baseDeduct:5000,
+  noIns:8000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:70000,
+      cost:36000,
+      bonus:34000
+    },
+    {
+      name:'尊榮',
+      original:72000,
+      cost:45000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
 },
 
 {
-model:'RAV4 HEV',year:'26/26',trim:'尊爵',
-price:1170000,base:58000,
-bonus1Name:'精裝',bonus1:34000,
-bonus2Name:'尊榮',bonus2:27000,
-cost1Name:'精裝',cost1:36000,
-cost2Name:'尊榮',cost2:45000,
-noIns:8000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
+  model:'RAV4 HEV',
+  year:'26/26',
+  trim:'尊爵',
+  price:1170000,
+
+  base:58000,
+  baseDeduct:5000,
+  noIns:8000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:70000,
+      cost:36000,
+      bonus:34000
+    },
+    {
+      name:'尊榮',
+      original:72000,
+      cost:45000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
 },
 
 {
-model:'RAV4 HEV',year:'26/26',trim:'尊爵＋',
-price:1220000,base:58000,
-bonus1Name:'精裝',bonus1:34000,
-bonus2Name:'尊榮',bonus2:27000,
-cost1Name:'精裝',cost1:36000,
-cost2Name:'尊榮',cost2:45000,
-noIns:8000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
+  model:'RAV4 HEV',
+  year:'26/26',
+  trim:'尊爵＋',
+  price:1220000,
+
+  base:58000,
+  baseDeduct:5000,
+  noIns:8000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:70000,
+      cost:36000,
+      bonus:34000
+    },
+    {
+      name:'尊榮',
+      original:72000,
+      cost:45000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
 },
 
 {
-model:'RAV4 HEV',year:'26/26',trim:'旗艦',
-price:1300000,base:78000,
-bonus1Name:'精裝',bonus1:34000,
-bonus2Name:'尊榮',bonus2:27000,
-cost1Name:'精裝',cost1:36000,
-cost2Name:'尊榮',cost2:45000,
-noIns:8000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
+  model:'RAV4 HEV',
+  year:'26/26',
+  trim:'旗艦',
+  price:1300000,
+
+  base:78000,
+  baseDeduct:5000,
+  noIns:8000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:70000,
+      cost:36000,
+      bonus:34000
+    },
+    {
+      name:'尊榮',
+      original:72000,
+      cost:45000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
 },
 
 {
-model:'RAV4 HEV',year:'26/26',trim:'Adventure',
-price:1330000,base:58000,
-bonus1Name:'精裝',bonus1:34000,
-bonus2Name:'尊榮',bonus2:27000,
-cost1Name:'精裝',cost1:36000,
-cost2Name:'尊榮',cost2:45000,
-noIns:8000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
+  model:'RAV4 HEV',
+  year:'26/26',
+  trim:'Adventure',
+  price:1330000,
+
+  base:58000,
+  baseDeduct:5000,
+  noIns:8000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:70000,
+      cost:36000,
+      bonus:34000
+    },
+    {
+      name:'尊榮',
+      original:72000,
+      cost:45000,
+      bonus:27000
+    }
+  ],
+
+  note:'',
+  invoiceNote:''
 },
 
 {
-model:'RAV4 HEV',year:'26/26',trim:'GR-S',
-price:1390000,base:51000,
-bonus1Name:'精裝',bonus1:34000,
-bonus2Name:'尊榮',bonus2:27000,
-cost1Name:'精裝',cost1:36000,
-cost2Name:'尊榮',cost2:45000,
-noIns:8000,note:'贈送璨晶鍍膜',
-quotes:['base','pkg1','pkg2only','pkg2']
+  model:'RAV4 HEV',
+  year:'26/26',
+  trim:'GR-S',
+  price:1390000,
+
+  base:51000,
+  baseDeduct:5000,
+  noIns:8000,
+
+  packages:[
+    {
+      name:'精裝',
+      original:70000,
+      cost:36000,
+      bonus:34000
+    },
+    {
+      name:'尊榮',
+      original:72000,
+      cost:45000,
+      bonus:27000
+    }
+  ],
+
+  note:'贈送璨晶鍍膜',
+  invoiceNote:''
 },
 
 {
-model:'RAV4 HEV',year:'26/26',trim:'PHEV',
-price:1490000,base:10000,
-bonus1Name:'',bonus1:0,
-bonus2Name:'尊榮套件',bonus2:34000,
-cost1Name:'',cost1:0,
-cost2Name:'尊榮套件',cost2:36000,
-noIns:8000,note:'無',
-quotes:['base','pkg2only']
-},
+  model:'RAV4 HEV',
+  year:'26/26',
+  trim:'PHEV',
+  price:1490000,
 
+  base:10000,
+  baseDeduct:5000,
+  noIns:8000,
 
+  packages:[
+    {
+      name:'尊榮套件',
+      original:72000,
+      cost:36000,
+      bonus:34000
+    }
+  ],
 
-
-
-/* =========================
-   COROLLA CROSS 26/27 汽油
-========================= */
-
-{
-model:'COROLLA CROSS',year:'26/27',trim:'汽油 豪華',
-price:809000,base:38000,
-bonus1Name:'精裝',bonus1:27000,
-bonus2Name:'影音',bonus2:27000,
-cost1Name:'精裝',cost1:23000,
-cost2Name:'影音',cost2:53000,
-noIns:4000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
-},
-
-{
-model:'COROLLA CROSS',year:'26/27',trim:'汽油 豪華（選）',
-price:839000,base:27000,
-bonus1Name:'精裝',bonus1:27000,
-bonus2Name:'影音',bonus2:27000,
-cost1Name:'精裝',cost1:23000,
-cost2Name:'影音',cost2:53000,
-noIns:4000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
-},
-
-{
-model:'COROLLA CROSS',year:'26/27',trim:'汽油 The 60th',
-price:889000,base:27000,
-bonus1Name:'精裝',bonus1:27000,
-bonus2Name:'影音',bonus2:27000,
-cost1Name:'精裝',cost1:23000,
-cost2Name:'影音',cost2:53000,
-noIns:4000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
-},
-
-{
-model:'COROLLA CROSS',year:'26/27',trim:'汽油 GR SPORT',
-price:915000,base:38000,
-bonus1Name:'精裝',bonus1:27000,
-bonus2Name:'影音',bonus2:27000,
-cost1Name:'精裝',cost1:23000,
-cost2Name:'影音',cost2:53000,
-noIns:4000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
-},
-
-
-/* =========================
-   COROLLA CROSS 26/27 HYBRID
-========================= */
-
-{
-model:'COROLLA CROSS',year:'26/27',trim:'HYBRID 豪華',
-price:849000,base:41000,
-bonus1Name:'精裝',bonus1:27000,
-bonus2Name:'影音',bonus2:27000,
-cost1Name:'精裝',cost1:23000,
-cost2Name:'影音',cost2:53000,
-noIns:4000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
-},
-
-{
-model:'COROLLA CROSS',year:'26/27',trim:'HYBRID 豪華（選）',
-price:879000,base:31000,
-bonus1Name:'精裝',bonus1:27000,
-bonus2Name:'影音',bonus2:27000,
-cost1Name:'精裝',cost1:23000,
-cost2Name:'影音',cost2:53000,
-noIns:4000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
-},
-
-{
-model:'COROLLA CROSS',year:'26/27',trim:'HYBRID The 60th',
-price:919000,base:31000,
-bonus1Name:'精裝',bonus1:27000,
-bonus2Name:'影音',bonus2:27000,
-cost1Name:'精裝',cost1:23000,
-cost2Name:'影音',cost2:53000,
-noIns:4000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
-},
-
-{
-model:'COROLLA CROSS',year:'26/27',trim:'HYBRID GR SPORT',
-price:985000,base:46000,
-bonus1Name:'精裝',bonus1:27000,
-bonus2Name:'影音',bonus2:27000,
-cost1Name:'精裝',cost1:23000,
-cost2Name:'影音',cost2:53000,
-noIns:4000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
-},
-
-{
-model:'COROLLA CROSS',year:'26/27',trim:'HYBRID GR SPORT（選）',
-price:1035000,base:41000,
-bonus1Name:'精裝',bonus1:27000,
-bonus2Name:'影音',bonus2:27000,
-cost1Name:'精裝',cost1:23000,
-cost2Name:'影音',cost2:53000,
-noIns:4000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
-},
-
-{
-model:'COROLLA CROSS',year:'26/27',trim:'HYBRID 旗艦',
-price:989000,base:41000,
-bonus1Name:'精裝',bonus1:27000,
-bonus2Name:'影音',bonus2:27000,
-cost1Name:'精裝',cost1:23000,
-cost2Name:'影音',cost2:53000,
-noIns:4000,note:'無',
-quotes:['base','pkg1','pkg2only','pkg2']
+  note:'交車津貼 NT$3,000（不折讓）',
+  invoiceNote:''
 }
 
 ];
 
 
+/*
+==================================================
+以下為共用計算程式
+以後新增車型不用修改這裡
+==================================================
+*/
+
 const $=id=>document.getElementById(id);
-const fmt=n=>'NT$ '+n.toLocaleString('zh-TW');
+
+const fmt=n=>
+  'NT$ '+Number(n).toLocaleString('zh-TW');
 
 const model=$('model');
 const year=$('year');
@@ -350,22 +1292,159 @@ const quote=$('quote');
 
 
 function current(){
+
   return data.find(x=>
     x.model===model.value &&
     x.year===year.value &&
     x.trim===trim.value
   );
+
+}
+
+
+/*
+產生所有可選報價組合
+
+例如：
+2個套件會自動產生
+空車
+空車＋套件1
+空車＋套件2
+空車＋套件1＋套件2
+*/
+
+function getQuoteOptions(d){
+
+  const result=[
+    {
+      value:'base',
+      packageIndexes:[],
+      label:'空車'
+    }
+  ];
+
+  const packages=d.packages||[];
+
+  const total=
+    Math.pow(2,packages.length);
+
+  for(let mask=1;mask<total;mask++){
+
+    const indexes=[];
+
+    for(let i=0;i<packages.length;i++){
+
+      if(mask & (1<<i)){
+        indexes.push(i);
+      }
+
+    }
+
+    const names=
+      indexes.map(i=>packages[i].name);
+
+    result.push({
+      value:'packages-'+indexes.join('-'),
+      packageIndexes:indexes,
+      label:'空車＋'+names.join('＋')
+    });
+
+  }
+
+  /*
+  排序：
+  空車
+  單一套件
+  多套件
+  */
+
+  result.sort((a,b)=>{
+
+    if(
+      a.packageIndexes.length !==
+      b.packageIndexes.length
+    ){
+      return (
+        a.packageIndexes.length -
+        b.packageIndexes.length
+      );
+    }
+
+    return a.packageIndexes[0] -
+           b.packageIndexes[0];
+
+  });
+
+  return result;
+
+}
+
+
+function selectedQuote(d){
+
+  return getQuoteOptions(d)
+    .find(x=>x.value===quote.value)
+    || getQuoteOptions(d)[0];
+
 }
 
 
 function fillModels(){
 
+  const old=model.value;
+
   model.innerHTML='';
 
-  [...new Set(data.map(x=>x.model))]
-  .forEach(x=>model.add(new Option(x,x)));
+  const models=[
+    ...new Set(
+      data.map(x=>x.model)
+    )
+  ];
+
+  /*
+  自動 A → Z
+  */
+
+  models.sort((a,b)=>
+    a.localeCompare(
+      b,
+      'en',
+      {
+        sensitivity:'base',
+        numeric:true
+      }
+    )
+  );
+
+  models.forEach(x=>
+    model.add(
+      new Option(x,x)
+    )
+  );
+
+  if(
+    [...model.options]
+    .some(o=>o.value===old)
+  ){
+    model.value=old;
+  }
 
   fillYears();
+
+}
+
+
+function yearNumber(value){
+
+  const parts=
+    value
+    .split('/')
+    .map(Number);
+
+  return (
+    (parts[0]||0)*100+
+    (parts[1]||0)
+  );
 
 }
 
@@ -376,14 +1455,37 @@ function fillYears(){
 
   year.innerHTML='';
 
-  [...new Set(
-    data
-    .filter(x=>x.model===model.value)
-    .map(x=>x.year)
-  )]
-  .forEach(x=>year.add(new Option(x,x)));
+  const years=[
+    ...new Set(
+      data
+      .filter(x=>
+        x.model===model.value
+      )
+      .map(x=>x.year)
+    )
+  ];
 
-  if([...year.options].some(o=>o.value===old)){
+  /*
+  年式新 → 舊
+  例如 26/27 → 26/26
+  */
+
+  years.sort(
+    (a,b)=>
+      yearNumber(b)-
+      yearNumber(a)
+  );
+
+  years.forEach(x=>
+    year.add(
+      new Option(x,x)
+    )
+  );
+
+  if(
+    [...year.options]
+    .some(o=>o.value===old)
+  ){
     year.value=old;
   }
 
@@ -404,37 +1506,22 @@ function fillTrims(){
     x.year===year.value
   )
   .forEach(x=>
-    trim.add(new Option(x.trim,x.trim))
+    trim.add(
+      new Option(
+        x.trim,
+        x.trim
+      )
+    )
   );
 
-  if([...trim.options].some(o=>o.value===old)){
+  if(
+    [...trim.options]
+    .some(o=>o.value===old)
+  ){
     trim.value=old;
   }
 
   fillQuotes();
-
-}
-
-
-function quoteLabel(d,type){
-
-  if(type==='base'){
-    return '空車';
-  }
-
-  if(type==='pkg1'){
-    return '空車＋'+d.cost1Name;
-  }
-
-  if(type==='pkg2'){
-    return '空車＋'+d.cost1Name+'＋'+d.cost2Name;
-  }
-
-  if(type==='pkg2only'){
-    return '空車＋'+d.cost2Name;
-  }
-
-  return '空車';
 
 }
 
@@ -449,16 +1536,22 @@ function fillQuotes(){
 
   quote.innerHTML='';
 
-  d.quotes.forEach(q=>{
+  getQuoteOptions(d)
+  .forEach(q=>{
+
     quote.add(
       new Option(
-        quoteLabel(d,q),
-        q
+        q.label,
+        q.value
       )
     );
+
   });
 
-  if([...quote.options].some(o=>o.value===old)){
+  if(
+    [...quote.options]
+    .some(o=>o.value===old)
+  ){
     quote.value=old;
   }
 
@@ -473,218 +1566,209 @@ function render(){
 
   if(!d)return;
 
+  const q=
+    selectedQuote(d);
 
-  /* 無乙式加回減發金額 */
+  const packages=
+    d.packages||[];
 
-  const adjustment=
-    ins.value==='無'
-    ? d.noIns
-    : 0;
+  /*
+  ==========================
+  原價
+  ==========================
+  */
+
+  let displayPrice=
+    d.price;
+
+  q.packageIndexes
+  .forEach(i=>{
+
+    displayPrice+=
+      packages[i].original||0;
+
+  });
 
 
-/* =========================
-   依報價方式，只顯示目前選擇的方案
-========================= */
+  /*
+  ==========================
+  獎金
+  ==========================
+  */
 
-let displayName='';
-let displayPrice=0;
-let displayBonus=0;
+  let displayBonus=
+    d.base;
 
+  /*
+  只有選「空車」時，
+  才扣空車扣發獎金。
+  */
 
-/* 空車 */
+  if(q.packageIndexes.length===0){
 
-if(quote.value==='base'){
+    displayBonus-=
+      d.baseDeduct||0;
 
-  displayName='空車';
+  }else{
 
-  displayPrice=d.price;
+    q.packageIndexes
+    .forEach(i=>{
 
-  let baseDiscount=0;
+      displayBonus+=
+        packages[i].bonus||0;
 
-  if(d.model==='RAV4 HEV'){
-    baseDiscount=5000;
+    });
+
   }
 
-  if(d.model==='COROLLA CROSS'){
-    baseDiscount=4000;
+
+  /*
+  ==========================
+  顯示原價／單價
+  ==========================
+  */
+
+  $('selectedPriceName').textContent=
+    q.label+
+    (
+      q.packageIndexes.length===0
+      ? '單價'
+      : '原價'
+    );
+
+  $('selectedPrice').textContent=
+    fmt(displayPrice);
+
+
+  $('selectedBonusName').textContent=
+    q.label+'獎金';
+
+  $('selectedBonus').textContent=
+    fmt(displayBonus);
+
+
+  /*
+  ==========================
+  空車扣發提示
+  ==========================
+  */
+
+  const hint=
+    $('bonusHint');
+
+  if(
+    q.packageIndexes.length===0 &&
+    (d.baseDeduct||0)>0
+  ){
+
+    hint.textContent=
+      '※ 空車扣發獎金 '+
+      fmt(d.baseDeduct);
+
+    hint.classList.remove(
+      'hidden'
+    );
+
+  }else{
+
+    hint.classList.add(
+      'hidden'
+    );
+
   }
 
-  displayBonus=d.base-baseDiscount;
 
-}
-
-/* 空車＋精裝 */
-
-if(quote.value==='pkg1'){
-
-  displayName=
-    '空車＋'+d.bonus1Name;
-
-  let original1=0;
-
-  if(d.model==='RAV4 HEV'){
-    original1=70000;
-  }
-
-  if(d.model==='COROLLA CROSS'){
-    original1=50000;
-  }
-
-  displayPrice=
-    d.price+
-    original1;
-
-  displayBonus=
-    d.base+
-    (d.bonus1||0);
-
-}
-
-
-/* 空車＋精裝＋尊榮 / 影音 */
-
-if(quote.value==='pkg2'){
-
-  displayName=
-    '空車＋'+
-    d.bonus1Name+
-    '＋'+
-    d.bonus2Name;
-
-  let original1=0;
-  let original2=0;
-
-  if(d.model==='RAV4 HEV'){
-    original1=70000;
-    original2=72000;
-  }
-
-  if(d.model==='COROLLA CROSS'){
-    original1=50000;
-    original2=80000;
-  }
-
-  displayPrice=
-    d.price+
-    original1+
-    original2;
-
-  displayBonus=
-    d.base+
-    (d.bonus1||0)+
-    (d.bonus2||0);
-
-}
-
-
-/* 空車＋第二套件
-   RAV4 = 尊榮
-   CC = 影音
-   PHEV = 尊榮套件
-*/
-
-if(quote.value==='pkg2only'){
-
-  displayName=
-    '空車＋'+d.bonus2Name;
-
-  let original2=0;
-
-  if(d.model==='RAV4 HEV'){
-    original2=72000;
-  }
-
-  if(d.model==='COROLLA CROSS'){
-    original2=80000;
-  }
-
-  displayPrice=
-    d.price+
-    original2;
-
-  displayBonus=
-    d.base+
-    (d.bonus2||0);
-
-}
-
-/* 顯示 */
-
-$('selectedPriceName').textContent=
-  displayName+
-  (quote.value==='base' ? '單價' : '原價');
-
-$('selectedPrice').textContent=
-  fmt(displayPrice);
-
-$('selectedBonusName').textContent=
-  displayName+'獎金';
-
-$('selectedBonus').textContent=
-  fmt(displayBonus);
-
-
-
-
-
-  /* =========================
-     成交／成本價計算
-  ========================= */
+  /*
+  ==========================
+  成本價
+  ==========================
+  */
 
   let amount=
     d.price-
-    d.base+
-    adjustment;
-
-  if(quote.value==='base'){
-
-  if(d.model==='RAV4 HEV'){
-    amount+=5000;
-  }
-
-  if(d.model==='COROLLA CROSS'){
-    amount+=4000;
-  }
-
-}
-  
+    d.base;
 
 
-  if(quote.value==='pkg1'){
-    amount+=d.cost1;
-  }
+  /*
+  空車才加回空車扣發
+  */
 
+  if(
+    q.packageIndexes.length===0
+  ){
 
-  if(quote.value==='pkg2'){
     amount+=
-      d.cost1+
-      d.cost2;
+      d.baseDeduct||0;
+
   }
 
 
-  if(quote.value==='pkg2only'){
-    amount+=d.cost2;
+  /*
+  套件成本
+  */
+
+  q.packageIndexes
+  .forEach(i=>{
+
+    amount+=
+      packages[i].cost||0;
+
+  });
+
+
+  /*
+  未投保乙式
+  加回減發金額
+  */
+
+  if(ins.value==='無'){
+
+    amount+=
+      d.noIns||0;
+
   }
-
-
-  let priceType='成本價';
 
 
   $('dealName').textContent=
-    quoteLabel(d,quote.value)+
-    priceType;
+    q.label+'成本價';
 
   $('deal').textContent=
     fmt(amount);
 
 
-  /* 備註 */
+  /*
+  ==========================
+  備註
+  ==========================
+  */
 
-  $('noteText').textContent=d.note;
+  const noteText=
+    (d.note||'').trim();
+
+  $('noteText').textContent=
+    noteText;
 
   $('note').classList.toggle(
     'hidden',
-    d.note==='無'
+    !noteText
+  );
+
+
+  /*
+  ==========================
+  發票註記
+  ==========================
+  */
+
+  const invoiceText=
+    (d.invoiceNote||'').trim();
+
+  $('invoiceText').textContent=
+    invoiceText;
+
+  $('invoice').classList.toggle(
+    'hidden',
+    !invoiceText
   );
 
 }
