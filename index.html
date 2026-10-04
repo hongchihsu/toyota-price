@@ -1954,52 +1954,111 @@ function getQuoteOptions(d){
 
   const packages=d.packages||[];
 
-if(d.exclusivePackages){
 
-  packages.forEach((pkg,i)=>{
+  /*
+  CROWN、bZ4X 這種套件完全互斥
+  */
 
-    result.push({
-      value:'packages-'+i,
-      packageIndexes:[i],
-      label:'空車＋'+pkg.name
+  if(d.exclusivePackages){
+
+    packages.forEach((pkg,i)=>{
+
+      result.push({
+        value:'packages-'+i,
+        packageIndexes:[i],
+        label:'空車＋'+pkg.name
+      });
+
     });
 
-  });
+  }else{
 
-}else{
 
-  const total=
-    Math.pow(2,packages.length);
+    /*
+    一般車型：
+    自動產生所有套件組合
+    */
 
-  for(let mask=1;mask<total;mask++){
+    const total=
+      Math.pow(2,packages.length);
 
-    const indexes=[];
 
-    for(let i=0;i<packages.length;i++){
+    for(let mask=1;mask<total;mask++){
 
-      if(mask & (1<<i)){
-        indexes.push(i);
+      const indexes=[];
+
+
+      for(let i=0;i<packages.length;i++){
+
+        if(mask & (1<<i)){
+
+          indexes.push(i);
+
+        }
+
       }
+
+
+      /*
+      ========================================
+      standalone:true 特殊規則
+
+      只要這個組合裡有 standalone 套件，
+      就不能再跟其他套件一起出現。
+
+      YARIS CROSS 的「全配套件（9萬）」
+      就會因此只能單獨選。
+      ========================================
+      */
+
+      const hasStandalone=
+        indexes.some(i=>
+          packages[i].standalone===true
+        );
+
+
+      if(
+        hasStandalone &&
+        indexes.length>1
+      ){
+
+        continue;
+
+      }
+
+
+      const names=
+        indexes.map(i=>
+          packages[i].name
+        );
+
+
+      result.push({
+
+        value:
+          'packages-'+
+          indexes.join('-'),
+
+        packageIndexes:
+          indexes,
+
+        label:
+          '空車＋'+
+          names.join('＋')
+
+      });
 
     }
 
-    const names=
-      indexes.map(i=>packages[i].name);
-
-    result.push({
-      value:'packages-'+indexes.join('-'),
-      packageIndexes:indexes,
-      label:'空車＋'+names.join('＋')
-    });
-
   }
 
-}
 
   /*
   排序：
   空車
+  ↓
   單一套件
+  ↓
   多套件
   */
 
@@ -2009,16 +2068,22 @@ if(d.exclusivePackages){
       a.packageIndexes.length !==
       b.packageIndexes.length
     ){
+
       return (
         a.packageIndexes.length -
         b.packageIndexes.length
       );
+
     }
 
-    return a.packageIndexes[0] -
-           b.packageIndexes[0];
+
+    return (
+      (a.packageIndexes[0] ?? -1) -
+      (b.packageIndexes[0] ?? -1)
+    );
 
   });
+
 
   return result;
 
@@ -2026,6 +2091,7 @@ if(d.exclusivePackages){
 
 
 function selectedQuote(d){
+
 
   return getQuoteOptions(d)
     .find(x=>x.value===quote.value)
