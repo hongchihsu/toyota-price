@@ -134,6 +134,7 @@ select{
   margin-top:12px;
   font-size:14px;
   line-height:1.5
+  white-space:pre-line;
 }
 
 .note b{
@@ -272,6 +273,143 @@ TOYOTA 車型資料區
 */
 
 const data=[
+  
+  /* ==================================================
+   ALPHARD 26/27
+================================================== */
+
+{
+  model:'ALPHARD',
+  year:'26/27',
+  trim:'油電',
+  price:3160000,
+
+  base:31600,
+  baseDeduct:8000,
+  noIns:8000,
+  
+  insuranceRequiredForBonus:true,
+  exclusivePackages:true,
+
+  packages:[
+    {
+      name:'PPS版',
+      original:130000,
+      cost:130000,
+      bonus:0,
+      bonusText:'車輛部另行規劃'
+    },
+    {
+      name:'尊榮版',
+      original:78000,
+      cost:48000,
+      bonus:30000
+    }
+  ],
+
+ note:'交車津貼 NT$10,000（不折讓）\n有特案取消交車津貼',
+},
+
+{
+  model:'ALPHARD',
+  year:'26/27',
+  trim:'PHEV',
+  price:3300000,
+
+  base:33000,
+  baseDeduct:8000,
+  noIns:8000,
+  
+  insuranceRequiredForBonus:true,
+  exclusivePackages:true,
+
+  packages:[
+    {
+      name:'PPS版',
+      original:130000,
+      cost:130000,
+      bonus:0,
+      bonusText:'車輛部另行規劃'
+    },
+    {
+      name:'尊榮版',
+      original:78000,
+      cost:48000,
+      bonus:30000
+    }
+  ],
+
+note:'交車津貼 NT$10,000（不折讓）\n有特案取消交車津貼',
+},
+
+
+/* ==================================================
+   SIENNA HEV 26/27
+================================================== */
+
+{
+  model:'SIENNA HEV',
+  year:'26/27',
+  trim:'旗艦',
+  price:2390000,
+
+  base:47800,
+  baseDeduct:8000,
+  noIns:8000,
+
+  exclusivePackages:true,
+
+  packages:[
+    {
+      name:'PPS版',
+      original:130000,
+      cost:130000,
+      bonus:0,
+      bonusText:'車輛部另行規劃'
+    },
+    {
+      name:'尊榮版',
+      original:80000,
+      cost:50000,
+      bonus:30000
+    }
+  ],
+
+  note:'交車津貼 1%（可折讓）',
+  invoiceNote:''
+},
+
+{
+  model:'SIENNA HEV',
+  year:'26/27',
+  trim:'鉑金',
+  price:2960000,
+
+  base:59200,
+  baseDeduct:8000,
+  noIns:8000,
+
+  exclusivePackages:true,
+
+  packages:[
+    {
+      name:'PPS版',
+      original:130000,
+      cost:130000,
+      bonus:0,
+      bonusText:'車輛部另行規劃'
+    },
+    {
+      name:'尊榮版',
+      original:80000,
+      cost:50000,
+      bonus:30000
+    }
+  ],
+
+  note:'交車津貼 1%（可折讓）',
+  invoiceNote:''
+},
   
   
   /* ==================================================
@@ -2367,9 +2505,22 @@ function render(){
   $('selectedBonusName').textContent=
     q.label+'獎金';
 
+  const specialBonusTexts=
+  q.packageIndexes
+   .map(i=>packages[i].bonusText)
+   .filter(Boolean);
+
+if(specialBonusTexts.length>0){
+
+  $('selectedBonus').textContent=
+    specialBonusTexts.join('＋');
+
+}else{
+
   $('selectedBonus').textContent=
     fmt(displayBonus);
 
+}
 
   /*
   ==========================
