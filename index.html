@@ -138,6 +138,12 @@ select{
 }
 
 .note b{
+  #warningNote{
+  display:block;
+  color:#d71920;
+  font-weight:700;
+  margin-top:4px;
+}
   display:block;
   margin-top:-8px;
   margin-bottom:3px
@@ -244,6 +250,7 @@ select{
   <div class="note hidden" id="note">
     <b>備註</b>
     <span id="noteText"></span>
+    <span id="warningNote"></span>
   </div>
 
 
@@ -308,7 +315,9 @@ const data=[
     }
   ],
 
- note:'交車津貼 NT$10,000（不折讓）\n有特案取消交車津貼',
+ note:'交車津貼 NT$10,000（不折讓)',
+ warningNote:'有特案取消交車津貼',
+
 },
 
 {
@@ -340,7 +349,8 @@ const data=[
     }
   ],
 
-note:'交車津貼 NT$10,000（不折讓）\n有特案取消交車津貼',
+note:'交車津貼 NT$10,000（不折讓)',
+warningNote:'有特案取消交車津貼',
 },
 
 
@@ -2649,11 +2659,20 @@ const noteText=
   notes.join('｜');
 
 $('noteText').textContent=
-  noteText;
+  noteText;const warningText=
+  (d.warningNote||'').trim();
+
+$('warningNote').textContent=
+  warningText;
+
+$('warningNote').classList.toggle(
+  'hidden',
+  !warningText
+);
 
 $('note').classList.toggle(
   'hidden',
-  !noteText
+  !noteText && !warningText
 );
 
   /*
