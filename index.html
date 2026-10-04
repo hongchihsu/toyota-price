@@ -708,20 +708,22 @@ const data=[
 
   packages:[
     {
-      name:'貴族套件',
+      name:'精裝套件',
       original:90000,
       cost:60000,
-      bonus:30000
+      bonus:30000,
+      note:'招攬精裝套件＋NT$8,000'
     },
     {
-      name:'全車系套件',
+      name:'精裝套件（20萬）',
       original:200000,
       cost:125000,
-      bonus:75000
+      bonus:75000,
+      note:'招攬精裝套件＋NT$8,000'
     }
   ],
 
-  note:'招攬精裝套件＋NT$8,000｜交車津貼 NT$5,000（可折讓）',
+  note:'交車津貼 NT$5,000（可折讓）',
   invoiceNote:''
 },
 
@@ -739,27 +741,29 @@ const data=[
 
   packages:[
     {
-      name:'皇家套件',
+      name:'精裝套件',
       original:100000,
       cost:66000,
-      bonus:34000
+      bonus:34000,
+      note:'招攬精裝套件＋NT$8,000'
     },
     {
-      name:'全車系套件',
+      name:'精裝套件（20萬）',
       original:200000,
       cost:125000,
-      bonus:75000
+      bonus:75000,
+      note:'招攬精裝套件＋NT$8,000'
     }
   ],
 
-  note:'招攬精裝套件＋NT$8,000｜交車津貼 NT$5,000（可折讓）',
+  note:'交車津貼 NT$5,000（可折讓）',
   invoiceNote:''
 },
 
 {
   model:'CROWN HEV',
   year:'26/27',
-  trim:'皇家 雙色',
+  trim:'皇家/雙色',
   price:2130000,
 
   base:21300,
@@ -770,20 +774,22 @@ const data=[
 
   packages:[
     {
-      name:'皇家套件',
+      name:'精裝套件',
       original:100000,
       cost:66000,
-      bonus:34000
+      bonus:34000,
+      note:'招攬精裝套件＋NT$8,000'
     },
     {
-      name:'全車系套件',
+      name:'精裝套件（20萬）',
       original:200000,
       cost:125000,
-      bonus:75000
+      bonus:75000,
+      note:'招攬精裝套件＋NT$8,000'
     }
   ],
 
-  note:'招攬精裝套件＋NT$8,000｜交車津貼 NT$5,000（可折讓）',
+  note:'交車津貼 NT$5,000（可折讓）',
   invoiceNote:''
 },
 
@@ -1682,9 +1688,17 @@ const data=[
   baseDeduct:5000,
   noIns:5000,
 
+  exclusivePackages:true,
+
   packages:[
     {
-      name:'PPS版',
+      name:'精裝套件',
+      original:60000,
+      cost:36000,
+      bonus:24000
+    },
+    {
+      name:'越野防護版',
       original:120000,
       cost:73000,
       bonus:47000
@@ -1694,7 +1708,6 @@ const data=[
   note:'交車津貼 NT$5,000（可折讓）',
   invoiceNote:''
 },
-
 
 
 /* ==================================================
@@ -2453,17 +2466,35 @@ function render(){
   ==========================
   */
 
-  const noteText=
-    (d.note||'').trim();
+  const notes=[];
 
-  $('noteText').textContent=
-    noteText;
+/* 車型固定備註 */
+if((d.note||'').trim()){
+  notes.push(d.note.trim());
+}
 
-  $('note').classList.toggle(
-    'hidden',
-    !noteText
-  );
+/* 只有選到有設定 note 的套件才顯示 */
+q.packageIndexes.forEach(i=>{
 
+  const packageNote=
+    (packages[i].note||'').trim();
+
+  if(packageNote){
+    notes.push(packageNote);
+  }
+
+});
+
+const noteText=
+  notes.join('｜');
+
+$('noteText').textContent=
+  noteText;
+
+$('note').classList.toggle(
+  'hidden',
+  !noteText
+);
 
   /*
   ==========================
