@@ -133,7 +133,7 @@ select{
   padding:13px 14px;
   margin-top:12px;
   font-size:14px;
-  line-height:1.5
+  line-height:1.5;
   white-space:pre-line;
 }
 
@@ -253,7 +253,7 @@ select{
 
 
   <div class="muted">
-    未投保乙式時，加回減發金額至成本價；獎金顯示不變。
+    未投保乙式時，加回減發金額至成本價；獎金顯示不變;部分車型獎金另依專案規定。
   </div>
 
 </div>
@@ -2514,6 +2514,14 @@ if(specialBonusTexts.length>0){
 
   $('selectedBonus').textContent=
     specialBonusTexts.join('＋');
+
+}else if(
+  d.insuranceRequiredForBonus===true &&
+  ins.value==='無'
+){
+
+  $('selectedBonus').textContent=
+    fmt(0);
 
 }else{
 
